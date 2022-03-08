@@ -2,9 +2,9 @@ name: pipeline
 
 on:
   push:
-    branches: [ master ]
+    branches: [ raph_diag ]
   pull_request:
-    branches: [ master ]
+    branches: [ raph_diag ]
 
 on: push
 jobs:
