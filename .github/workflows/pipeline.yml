@@ -25,7 +25,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with: raphaelokere/diag-upload-service
-          images: raphaelokere/diag-upload-service
+          images: diag-upload-service
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
