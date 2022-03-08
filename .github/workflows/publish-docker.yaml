@@ -1,11 +1,4 @@
-name: pipeline
-
-on:
-  push:
-    branches: [ raph_diag ]
-  pull_request:
-    branches: [ raph_diag ]
-
+name: Publish Docker image
 on: push
 jobs:
   push_to_docker_hub:
@@ -23,19 +16,14 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images:       
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        uses: docker/metadata-action@v3
         with:
           images: raphaelokere/diag-upload-service
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
-        with: raphaelokere/diag-upload-service
-          context: ./
+        with:
+          context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

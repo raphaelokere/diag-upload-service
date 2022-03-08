@@ -2,17 +2,14 @@
   "name": "diag-service",
   "version": "1.0.0",
   "description": "service for uploading diags",
-  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "test"
   },
-  "author": "Raph",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "express-fileupload": "^1.2.1",
-    "index.js": "^0.0.3",
-    "start-server-and-test": "^1.14.0"
+    "express-fileupload": "^1.2.1"
   }
 }
