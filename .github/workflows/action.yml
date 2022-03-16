@@ -1,13 +1,7 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Action!
-
 on:
   push:
     branches: [ raph_diag ]
-  pull_request:
-    branches: [ raph_diag ]
+
 
 jobs:
   test:
@@ -31,29 +25,28 @@ jobs:
       env:
         CI: true
         working-directory: usr/app
+
+  push_to_docker_hub:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
         
-  build_docker_image:
-      runs-on: ubuntu-latest
-      steps:
-      - name: Build Docker Image
-      - uses: docker/build-push-action@v2
-      - with: 
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-  
-  push_docker_image:
-      needs: build_docker_image
-      runs-on: ubuntu-latest
-      steps:
-      - name: Check out the repo
-        uses: actions/checkout@v2
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@v3
+      with:
+        images: ${{ secrets.DOCKERHUB_REPO }}
+        
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
