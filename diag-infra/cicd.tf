@@ -83,7 +83,7 @@ resource "aws_codepipeline" "pipeline" {
 
       configuration = {
         ClusterName = "ecs_cluster"
-        ServiceName = "svc"
+        ServiceName = "ecs_cluster"
         FileName    = "imagedefinitions.json"
       }
     }
