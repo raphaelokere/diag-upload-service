@@ -82,8 +82,8 @@ resource "aws_codepipeline" "pipeline" {
       input_artifacts = ["build_output"]
 
       configuration = {
-        ClusterName = "ecs_cluster"
-        ServiceName = "ecs_cluster"
+        ClusterName = "diag-upload-svc"
+        ServiceName = "diag-upload-svc"
         FileName    = "imagedefinitions.json"
       }
     }
