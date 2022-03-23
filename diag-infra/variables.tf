@@ -37,5 +37,5 @@ variable "build_project" {
 
 variable "uri_repo" {
   type = string
-  #The URI_REPO value is in a TF_VAR in my PC
+  default = "658108419956.dkr.ecr.us-east-1.amazonaws.com/diag-svc-repo"
 }
