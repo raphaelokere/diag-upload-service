@@ -19,7 +19,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
 
   container_definitions = jsonencode([
     {
-      name   = "diag-upload-svc-container"
+      name   = "diag-upload-svc"
       image  = "${var.uri_repo}:latest" #URI
       cpu    = 256
       memory = 512
@@ -49,7 +49,7 @@ resource "aws_ecs_service" "svc" {
 
   load_balancer {
     target_group_arn = "${aws_lb_target_group.alb_tg.arn}"
-    container_name   = "diag-upload-svc-container"
+    container_name   = "diag-upload-svc"
     container_port   = "8000"
   }
 }
