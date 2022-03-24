@@ -2,8 +2,7 @@
 
 ## About
 
-This app is written with flaws on purpose, 
-please do not use in production. 
+The application has obvious errors meant to for optimization.
 
 ## Run it
 
